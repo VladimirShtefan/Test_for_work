@@ -25,16 +25,22 @@ class Statistic(ConvertData):
         return sorted_data
 
     def get_statistic(self, number_of_entries: int = 0) -> list:
+        """
+        Функция формирования статистики
+        :param number_of_entries: колличество записей для вывода
+        :return: List
+        """
         result = []
         counter = 0
-        if number_of_entries == 0:
-            sorted_data = self._sort_dict_by_time()
-            competitor_data = self._get_all_competitors()
-            for competitor, data in sorted_data.items():
-                counter += 1
-                result.append((counter,
-                               competitor,
-                               competitor_data[competitor]['Name'],
-                               competitor_data[competitor]['Surname'],
-                               str(data).replace('.', ',')))
+        sorted_data: dict = self._sort_dict_by_time()
+        competitor_data: dict[dict] = self._get_all_competitors()
+        for competitor, data in sorted_data.items():
+            counter += 1
+            if counter > number_of_entries != 0:
+                break
+            result.append((counter,
+                           competitor,
+                           competitor_data[competitor]['Name'],
+                           competitor_data[competitor]['Surname'],
+                           str(data).replace('.', ',')))
         return result
